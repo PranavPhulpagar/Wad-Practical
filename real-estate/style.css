@@ -1,0 +1,72 @@
+body {
+
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(to right, #dfe9f3, #ffffff);
+}
+
+/* Heading */
+.main-heading {
+
+    color: #0d6efd;
+
+    font-weight: bold;
+
+    margin-top: 20px;
+}
+
+.sub-text {
+
+    color: #555;
+
+    font-size: 18px;
+}
+
+/* Property Card */
+.property-card {
+
+    border: none;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    transition: 0.3s;
+
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+}
+
+/* Hover Effect */
+.property-card:hover {
+
+    transform: translateY(-10px);
+}
+
+/* Card Image */
+.card-img-top {
+
+    height: 250px;
+
+    object-fit: cover;
+}
+
+/* Price */
+.price {
+
+    color: green;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+/* Contact Button */
+.contact-btn {
+
+    border-radius: 10px;
+
+    font-size: 17px;
+}

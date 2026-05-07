@@ -1,0 +1,62 @@
+body{
+
+    background: linear-gradient(to right,#141e30,#243b55);
+
+    font-family: Arial, sans-serif;
+
+    min-height: 100vh;
+}
+
+/* Movie Card */
+.movie-card{
+
+    border: none;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
+}
+
+/* Movie Image */
+.card-img-top{
+
+    height: 400px;
+
+    object-fit: cover;
+}
+
+/* Card Body */
+.card-body{
+
+    padding: 30px;
+}
+
+/* Title */
+.card-title{
+
+    color: #dc3545;
+
+    font-weight: bold;
+}
+
+/* Button */
+.btn-danger{
+
+    font-size: 18px;
+
+    border-radius: 10px;
+}
+
+/* Result Box */
+.result-box{
+
+    text-align: center;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: green;
+}

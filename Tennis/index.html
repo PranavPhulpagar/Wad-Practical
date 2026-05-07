@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All About Tennis</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+
+        <div class="container-fluid">
+
+            <a class="navbar-brand fw-bold" href="#">
+                Tennis World
+            </a>
+
+            <!-- Mobile Button -->
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menu"
+                    title="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#players">
+                            Players
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#rules">
+                            Rules
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#schedule">
+                            Grand Slams
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- Header -->
+    <header class="header-section">
+
+        <h1>All About Tennis</h1>
+
+        <p>Explore Famous Players, Rules and Grand Slam Tournaments</p>
+
+    </header>
+
+    <!-- Players Section -->
+    <div class="container my-5" id="players">
+
+        <h2 class="text-center mb-4">Famous Tennis Players</h2>
+
+        <div class="row">
+
+            <!-- Federer -->
+            <div class="col-md-4 mb-4">
+
+                <div class="card tennis-card shadow">
+
+                    <img src="data:image/webp;base64,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"
+                         class="card-img-top"
+                         alt="Roger Federer">
+
+                    <div class="card-body text-center">
+
+                        <h3>Roger Federer</h3>
+
+                        <button class="btn btn-success"
+                                onclick="showAchievement('Roger Federer won 20 Grand Slam titles.')">
+
+                            Achievements
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Nadal -->
+            <div class="col-md-4 mb-4">
+
+                <div class="card tennis-card shadow">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiQJiM1rEjgPnrGpzIifdJwrgmU9-33TJqyQ&s"
+                         class="card-img-top"
+                         alt="Rafael Nadal">
+
+                    <div class="card-body text-center">
+
+                        <h3>Rafael Nadal</h3>
+
+                        <button class="btn btn-danger"
+                                onclick="showAchievement('Rafael Nadal won 22 Grand Slam titles.')">
+
+                            Achievements
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Djokovic -->
+            <div class="col-md-4 mb-4">
+
+                <div class="card tennis-card shadow">
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbx0xfjNflZsXiK4xZjxE2KU3lonP4NE7diQ&s"
+                         class="card-img-top"
+                         alt="Novak Djokovic">
+
+                    <div class="card-body text-center">
+
+                        <h3>Novak Djokovic</h3>
+
+                        <button class="btn btn-primary"
+                                onclick="showAchievement('Novak Djokovic is one of the greatest tennis players.')">
+
+                            Achievements
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Rules Section -->
+    <div class="container my-5" id="rules">
+
+        <div class="info-box shadow">
+
+            <h2>Tennis Rules</h2>
+
+            <ul>
+                <li>A tennis match is played between two or four players.</li>
+                <li>A player must win at least 6 games to win a set.</li>
+                <li>The ball must stay inside the court boundaries.</li>
+                <li>Players score points as 15, 30, 40 and Game.</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- Grand Slam Schedule -->
+    <div class="container my-5" id="schedule">
+
+        <div class="info-box shadow">
+
+            <h2>Grand Slam Schedule</h2>
+
+            <table class="table table-bordered text-center">
+
+                <thead class="table-success">
+
+                    <tr>
+                        <th>Tournament</th>
+                        <th>Country</th>
+                        <th>Month</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Australian Open</td>
+                        <td>Australia</td>
+                        <td>January</td>
+                    </tr>
+
+                    <tr>
+                        <td>French Open</td>
+                        <td>France</td>
+                        <td>May</td>
+                    </tr>
+
+                    <tr>
+                        <td>Wimbledon</td>
+                        <td>England</td>
+                        <td>July</td>
+                    </tr>
+
+                    <tr>
+                        <td>US Open</td>
+                        <td>USA</td>
+                        <td>August</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+
+        <p>© 2026 Tennis World Website</p>
+
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- External JS -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

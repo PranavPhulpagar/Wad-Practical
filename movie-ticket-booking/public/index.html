@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Booking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>🎬 Movie Ticket Booking</h1>
+
+        <div class="movie-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy1J3b3oFYSS_ltnmJpnZaNoENJfFkh1EbVQ&s" alt="Movie Poster">
+
+            <div class="details">
+                <h2>Avengers: Endgame</h2>
+
+                <p><strong>Time:</strong> 7:00 PM</p>
+                <p><strong>Price:</strong> ₹250</p>
+
+                <label>Select Seats:</label>
+                <input type="number" id="seats" min="1" max="10" value="1">
+
+                <button onclick="bookTicket()">Book Now</button>
+
+                <h3 id="result"></h3>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

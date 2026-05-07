@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Restaurant Menu</title>
+
+    <!-- jQuery Mobile CSS -->
+    <link rel="stylesheet"
+    href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+    <style>
+        body{
+
+    font-family: Arial, sans-serif;
+
+    background: #f4f4f4;
+}
+
+/* Header */
+.header-box{
+
+    background: #ff5722 !important;
+
+    color: white !important;
+}
+
+/* Title */
+.title{
+
+    text-align: center;
+
+    color: #ff5722;
+
+    margin-bottom: 20px;
+}
+
+/* List Images */
+.ui-listview img{
+
+    width: 100px !important;
+
+    height: 100px !important;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+}
+
+/* Details Page */
+.details-page{
+
+    text-align: center;
+}
+
+/* Details Image */
+.details-page img{
+
+    width: 100%;
+
+    max-width: 400px;
+
+    border-radius: 20px;
+
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+}
+
+/* Price */
+.details-page h3{
+
+    color: green;
+
+    margin-top: 20px;
+}
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HOME PAGE -->
+    <div data-role="page" id="home">
+
+        <!-- Header -->
+        <div data-role="header" class="header-box">
+
+            <h1>🍴 Food Paradise</h1>
+
+        </div>
+
+        <!-- Main Content -->
+        <div role="main" class="ui-content">
+
+            <h2 class="title">
+                Restaurant Menu
+            </h2>
+
+            <!-- Menu List -->
+            <ul data-role="listview"
+                data-inset="true">
+
+                <!-- Pizza -->
+                <li>
+
+                    <a href="#pizza">
+
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200&auto=format&fit=crop">
+
+                        <h2>Cheese Pizza</h2>
+
+                        <p>Click to view details</p>
+
+                    </a>
+
+                </li>
+
+                <!-- Burger -->
+                <li>
+
+                    <a href="#burger">
+
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200&auto=format&fit=crop">
+
+                        <h2>Chicken Burger</h2>
+
+                        <p>Click to view details</p>
+
+                    </a>
+
+                </li>
+
+                <!-- Pasta -->
+                <li>
+
+                    <a href="#pasta">
+
+                        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=1200&auto=format&fit=crop">
+
+                        <h2>White Sauce Pasta</h2>
+
+                        <p>Click to view details</p>
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- PIZZA PAGE -->
+    <div data-role="page" id="pizza">
+
+        <div data-role="header">
+
+            <a href="#home"
+               class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left">
+
+               Back
+
+            </a>
+
+            <h1>Cheese Pizza</h1>
+
+        </div>
+
+        <div role="main" class="ui-content details-page">
+
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200&auto=format&fit=crop">
+
+            <h2>🍕 Cheese Pizza</h2>
+
+            <p>
+                Delicious cheesy pizza loaded with fresh toppings.
+            </p>
+
+            <h3>Price : ₹299</h3>
+
+        </div>
+
+    </div>
+
+    <!-- BURGER PAGE -->
+    <div data-role="page" id="burger">
+
+        <div data-role="header">
+
+            <a href="#home"
+               class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left">
+
+               Back
+
+            </a>
+
+            <h1>Chicken Burger</h1>
+
+        </div>
+
+        <div role="main" class="ui-content details-page">
+
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200&auto=format&fit=crop">
+
+            <h2>🍔 Chicken Burger</h2>
+
+            <p>
+                Crispy chicken burger with fresh vegetables and sauces.
+            </p>
+
+            <h3>Price : ₹199</h3>
+
+        </div>
+
+    </div>
+
+    <!-- PASTA PAGE -->
+    <div data-role="page" id="pasta">
+
+        <div data-role="header">
+
+            <a href="#home"
+               class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left">
+
+               Back
+
+            </a>
+
+            <h1>White Sauce Pasta</h1>
+
+        </div>
+
+        <div role="main" class="ui-content details-page">
+
+            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=1200&auto=format&fit=crop">
+
+            <h2>🍝 White Sauce Pasta</h2>
+
+            <p>
+                Creamy white sauce pasta topped with herbs and cheese.
+            </p>
+
+            <h3>Price : ₹249</h3>
+
+        </div>
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!-- jQuery Mobile -->
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

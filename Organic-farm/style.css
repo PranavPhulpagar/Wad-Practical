@@ -1,0 +1,63 @@
+body {
+    background-color: #f4fff4;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+
+.header-section {
+    background: linear-gradient(to right, #11998e, #38ef7d);
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+.header-section h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+/* Cards */
+
+.farm-card {
+    border-radius: 15px;
+    transition: transform 0.4s;
+}
+
+/* Animation */
+
+.farm-card:hover {
+    transform: scale(1.05);
+}
+
+.farm-card img {
+    height: 220px;
+    object-fit: cover;
+}
+
+/* Animated Button */
+
+.animated-btn {
+    transition: 0.3s;
+}
+
+.animated-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Offer Box */
+
+.offer-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+/* Footer */
+
+footer {
+    background-color: #212529;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}

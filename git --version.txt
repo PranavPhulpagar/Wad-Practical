@@ -1,0 +1,74 @@
+git --version
+git config --global user.name "Your Name"
+git config --global user.email "yourgmail@gmail.com"
+
+Go to GitHub
+
+create New Repository
+
+
+
+cd Desktop/project
+git init
+git add .
+git commit -m "Initial Commit"
+Copy repository URL from GitHub.
+
+Example:git remote add origin https://github.com/PranavPhulpagar/restaurant-menu.git
+
+git add .
+git commit-m "initial commit"
+git push
+git push --set-upstream origin master
+
+
+
+
+
+Step 10: Push Code to GitHub
+git branch -M main
+git push -u origin main
+
+
+PULL Demonstration
+git pull origin main
+
+Create New Branch
+git branch feature
+
+Switch to Branch
+git checkout feature
+or git switch feature
+
+Check Branches
+git branch
+* feature
+
+Switch Back to Main
+git checkout main
+
+git merge feature
+
+
+
+
+
+
+
+
+
+
+
+
+| Command         | Purpose               |
+| --------------- | --------------------- |
+| `git init`      | Initialize repository |
+| `git add .`     | Add files             |
+| `git commit -m` | Save changes          |
+| `git push`      | Upload code           |
+| `git pull`      | Download latest code  |
+| `git branch`    | Create/check branch   |
+| `git checkout`  | Switch branch         |
+| `git merge`     | Merge branches        |
+
+

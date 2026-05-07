@@ -1,0 +1,46 @@
+body {
+
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+}
+
+/* Header */
+.header-box {
+
+    background: #0d6efd !important;
+
+    color: white !important;
+}
+
+/* Form Container */
+.form-box {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+
+    margin-top: 20px;
+}
+
+/* Labels */
+label {
+
+    font-weight: bold;
+}
+
+/* Button */
+.ui-btn-b {
+
+    background: #0d6efd !important;
+
+    border: none !important;
+
+    border-radius: 10px !important;
+
+    font-size: 18px !important;
+}

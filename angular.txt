@@ -1,0 +1,334 @@
+In your my-angular-docker-app folder, create a file named Dockerfile (no extension) with this content:
+FROM node:20-alpine
+
+RUN npm install -g @angular/cli@17
+
+WORKDIR /app
+
+EXPOSE 4200
+
+In the same folder, create docker-compose.yml:
+services:
+  angular-app:
+    build: .
+    container_name: angular_app
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./angular-app:/app
+    working_dir: /app
+    environment:
+      - NG_CLI_ANALYTICS=false
+    command: sh -c "ng analytics disable --global && npm install && ng serve --host 0.0.0.0 --poll 2000"
+    stdin_open: true
+    tty: true
+
+
+In your terminal (inside my-angular-docker-app folder):
+docker build -t my-angular-image .
+(for cmd)
+docker run --rm -v "%cd%/angular-app:/app" my-angular-image sh -c "ng new my-app --directory /app --routing=true --style=css --skip-git=true --defaults=true"
+(for powershell)
+docker run --rm -v "${PWD}:/workspace" my-angular-image sh -c "cd /workspace && ng new angular-app --routing=true --style=css --skip-git=true --defaults=true"
+
+ls angular-app
+
+cd angular-app\src\app
+
+
+Set-Content app.component.ts @'
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  template: `<router-outlet></router-outlet>`
+})
+export class AppComponent {}
+'@
+
+
+Set-Content app.routes.ts @'
+import { Routes } from '@angular/router';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { authGuard } from './auth.guard';
+
+export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] }
+];
+'@
+
+
+Set-Content app.config.ts @'
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes)]
+};
+'@
+
+
+Set-Content auth.service.ts @'
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
+export interface User {
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+}
+
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  constructor(private router: Router) {}
+
+  register(user: User): boolean {
+    const existing = localStorage.getItem(user.email);
+    if (existing) return false;
+    localStorage.setItem(user.email, JSON.stringify(user));
+    return true;
+  }
+
+  login(email: string, password: string): boolean {
+    const data = localStorage.getItem(email);
+    if (!data) return false;
+    const user: User = JSON.parse(data);
+    if (user.password === password) {
+      localStorage.setItem('loggedInUser', email);
+      return true;
+    }
+    return false;
+  }
+
+  getLoggedInUser(): User | null {
+    const email = localStorage.getItem('loggedInUser');
+    if (!email) return null;
+    const data = localStorage.getItem(email);
+    return data ? JSON.parse(data) : null;
+  }
+
+  logout(): void {
+    localStorage.removeItem('loggedInUser');
+    this.router.navigate(['/login']);
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('loggedInUser');
+  }
+}
+'@
+
+
+Set-Content auth.guard.ts @'
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from './auth.service';
+
+export const authGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  if (auth.isLoggedIn()) return true;
+  router.navigate(['/login']);
+  return false;
+};
+'@
+
+
+mkdir register
+
+Set-Content register\register.component.ts @'
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-register',
+  standalone: true,
+  imports: [FormsModule, CommonModule, RouterLink],
+  templateUrl: './register.component.html'
+})
+export class RegisterComponent {
+  name = ''; email = ''; password = ''; phone = '';
+  message = ''; error = '';
+
+  constructor(private auth: AuthService, private router: Router) {}
+
+  register() {
+    this.message = ''; this.error = '';
+    if (!this.name || !this.email || !this.password || !this.phone) {
+      this.error = 'All fields are required!';
+      return;
+    }
+    const success = this.auth.register({
+      name: this.name, email: this.email,
+      password: this.password, phone: this.phone
+    });
+    if (success) {
+      this.message = 'Registered successfully! Redirecting to login...';
+      setTimeout(() => this.router.navigate(['/login']), 1500);
+    } else {
+      this.error = 'Email already registered. Try logging in.';
+    }
+  }
+}
+'@
+
+
+Set-Content register\register.component.html @'
+<div class="container">
+  <div class="card">
+    <h2>Register</h2>
+    <input [(ngModel)]="name" placeholder="Full Name" type="text" />
+    <input [(ngModel)]="email" placeholder="Email Address" type="email" />
+    <input [(ngModel)]="password" placeholder="Password" type="password" />
+    <input [(ngModel)]="phone" placeholder="Phone Number" type="tel" />
+    <button (click)="register()">Create Account</button>
+    <p class="success" *ngIf="message">{{ message }}</p>
+    <p class="error" *ngIf="error">{{ error }}</p>
+    <p>Already have an account? <a routerLink="/login">Login here</a></p>
+  </div>
+</div>
+'@
+
+
+mkdir login
+
+Set-Content login\login.component.ts @'
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule, CommonModule, RouterLink],
+  templateUrl: './login.component.html'
+})
+export class LoginComponent {
+  email = ''; password = ''; error = '';
+
+  constructor(private auth: AuthService, private router: Router) {}
+
+  login() {
+    this.error = '';
+    if (!this.email || !this.password) {
+      this.error = 'Please enter email and password!';
+      return;
+    }
+    const success = this.auth.login(this.email, this.password);
+    if (success) this.router.navigate(['/profile']);
+    else this.error = 'Invalid email or password.';
+  }
+}
+'@
+
+
+Set-Content login\login.component.html @'
+<div class="container">
+  <div class="card">
+    <h2>Login</h2>
+    <input [(ngModel)]="email" placeholder="Email Address" type="email" />
+    <input [(ngModel)]="password" placeholder="Password" type="password" />
+    <button (click)="login()">Login</button>
+    <p class="error" *ngIf="error">{{ error }}</p>
+    <p>Do not have an account? <a routerLink="/register">Register here</a></p>
+  </div>
+</div>
+'@
+
+
+mkdir profile
+
+Set-Content profile\profile.component.ts @'
+import { Component, OnInit } from '@angular/core';
+import { AuthService, User } from '../auth.service';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-profile',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './profile.component.html'
+})
+export class ProfileComponent implements OnInit {
+  user: User | null = null;
+
+  constructor(private auth: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    this.user = this.auth.getLoggedInUser();
+  }
+
+  logout() {
+    this.auth.logout();
+  }
+}
+'@
+
+
+Set-Content profile\profile.component.html @'
+<div class="container">
+  <div class="card profile-card" *ngIf="user">
+    <div class="avatar">{{ user.name[0].toUpperCase() }}</div>
+    <h2>My Profile</h2>
+    <div class="info-row"><span>Name</span><strong>{{ user.name }}</strong></div>
+    <div class="info-row"><span>Email</span><strong>{{ user.email }}</strong></div>
+    <div class="info-row"><span>Phone</span><strong>{{ user.phone }}</strong></div>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</div>
+'@
+
+Go back to src folder
+
+Set-Content styles.css @'
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Segoe UI, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+.container { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+.card { background: white; border-radius: 20px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 16px; }
+h2 { text-align: center; color: #1a202c; font-size: 1.8rem; margin-bottom: 8px; }
+input { width: 100%; padding: 13px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 15px; outline: none; transition: border 0.2s; }
+input:focus { border-color: #667eea; }
+button { width: 100%; padding: 14px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+button:hover { opacity: 0.85; }
+.error { color: #e53e3e; text-align: center; font-size: 14px; }
+.success { color: #38a169; text-align: center; font-size: 14px; }
+a { color: #667eea; text-decoration: none; font-weight: 600; }
+p { text-align: center; font-size: 14px; color: #718096; }
+.profile-card { gap: 20px; }
+.avatar { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; font-size: 2.5rem; font-weight: bold; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
+.info-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 16px; background: #f7fafc; border-radius: 10px; border-left: 4px solid #667eea; }
+.info-row span { color: #718096; font-size: 14px; }
+.info-row strong { color: #1a202c; }
+.logout-btn { background: linear-gradient(135deg, #fc4545, #c0392b); }
+'@
+
+
+Go back to the root folder and start Docker:
+
+cd ..\..\..
+docker-compose up --build
+
+
+Open browser: http://localhost:4200
+
+
+
+
+
+
