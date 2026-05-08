@@ -1,0 +1,119 @@
+Download docker desktop
+docker --version
+
+
+in folder create index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Docker Container</title>
+
+    <style>
+
+        body{
+
+            margin:0;
+
+            padding:0;
+
+            font-family:Arial;
+
+            background:linear-gradient(to right,#1e3c72,#2a5298);
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            height:100vh;
+
+            color:white;
+        }
+
+        .box{
+
+            text-align:center;
+
+            background:white;
+
+            color:black;
+
+            padding:40px;
+
+            border-radius:20px;
+
+            box-shadow:0px 0px 15px rgba(0,0,0,0.4);
+        }
+
+        h1{
+
+            color:#0d6efd;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>🐳 Docker Container Running</h1>
+
+        <p>
+            Successfully Created Docker Environment
+        </p>
+
+    </div>
+
+</body>
+</html>
+
+
+Dockerfile (no extension)
+FROM nginx:latest
+
+COPY . /usr/share/nginx/html
+
+
+
+commands
+docker build -t docker-demo .
+docker run -d -p 8080:80 docker-demo
+http://localhost:8080
+
+
+docker ps
+docker stop container_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
